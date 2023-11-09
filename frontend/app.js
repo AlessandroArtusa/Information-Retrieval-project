@@ -1,34 +1,18 @@
-const COIN_RANKING_API_URL = "http://localhost:8888/coins"
+const COIN_RANKING_API_URL_CMC = "http://localhost:8888/coins/coinmarketcap"
 const coinList = document.getElementById("data")
-const filterInput = document.getElementById("filter")
 
 let coinsData = []
 let filteredCoins = []
 
-var formatCash = n => {
-  if (n < 1e3) return n;
-  if (n >= 1e4) return + (n / 1e9).toFixed(2) + "billion ETC"
-}
-
-
-filterInput.addEventListener('keyup', (e) => {
-  const inputValue = e.target.value
-
-  filteredCoins = coinsData.filter(coin => {
-    return coin.name.toLowerCase().includes(inputValue)
-  })
-  displayCoins(filteredCoins)
-})
-
 const loadCoins = async () => {
   try {
-    const res = await fetch(COIN_RANKING_API_URL)
-    const dataResponse = await res.json()
-    coinsData = dataResponse.data.coins
-    console.log(dataResponse)
-    displayCoins(dataResponse.data.coins)
+    const res = await fetch(COIN_RANKING_API_URL_CMC);
+    const dataResponse = await res.json();
+    coinsData = dataResponse.data;
+    console.log(dataResponse);
+    displayCoins(dataResponse.data);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 
@@ -37,13 +21,13 @@ const displayCoins = (coins) => {
     return `
     <tr>
       <td>${coin.name}</td>
-      <td>${coin.rank}</td>
-      <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.price)}</td>
-      <td>${formatCash(coin.marketCap)}</td>
+      <td>${coin.cmc_rank}</td>
+      <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.quote.USD.price)}</td>
+      <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.quote.USD.market_cap)}</td>
       <td>${coin.symbol}</td>
-      <td><img src="${coin.iconUrl}" height="25" width="25" /></td>
+      <td><img src="img/cryptocurrency-icons-master/svg/icon/${coin.symbol.toLowerCase()}.svg" height="25" width="25" /></td>
       <td>
-      <a href="${coin.coinrankingUrl}" target="_blank">
+      <a href="https://coinmarketcap.com/currencies/${coin.slug}/" target="_blank">
       <i class="fas fa-chart-line"></i>
       </a>
       </td>
