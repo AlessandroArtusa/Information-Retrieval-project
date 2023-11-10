@@ -9,7 +9,6 @@ const loadCoins = async () => {
     const res = await fetch(COIN_RANKING_API_URL_CMC);
     const dataResponse = await res.json();
     coinsData = dataResponse.data;
-    console.log(dataResponse);
     displayCoins(dataResponse.data);
   } catch (error) {
     console.log(error);
@@ -25,7 +24,6 @@ const displayCoins = (coins) => {
       <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.quote.USD.price)}</td>
       <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.quote.USD.market_cap)}</td>
       <td>${coin.symbol}</td>
-      <td><img src="img/cryptocurrency-icons-master/svg/icon/${coin.symbol.toLowerCase()}.svg" height="25" width="25" /></td>
       <td>
       <a href="https://coinmarketcap.com/currencies/${coin.slug}/" target="_blank">
       <i class="fas fa-chart-line"></i>
