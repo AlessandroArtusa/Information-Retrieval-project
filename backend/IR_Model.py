@@ -64,7 +64,15 @@ def search_cryptocurrencies(query):
     bm25 = pt.BatchRetrieve(index_ref, wmodel="BM25")
     results = bm25.search(query)
     if not results.empty:
-        return results
+        # Print the results dataframe
+        print("Search Results:\n", results)
+    
+        # Retrieve and print detailed information for each result
+        for _, row in results.iterrows():
+            docno = row['docno']
+            detailed_info = df[df['docno'] == docno]
+            print("\nDetailed Information for docno", docno, ":\n", detailed_info[['name', 'symbol', 'price', 'market_cap']])
+
     else:
         return "No results found"
 
