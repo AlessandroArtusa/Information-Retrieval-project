@@ -1,20 +1,85 @@
 const COIN_RANKING_API_URL_CMC = "http://localhost:8888/coins/coinmarketcap"
-const coinList = document.getElementById("data")
+const coinList = document.getElementById("data");
 
-let coinsData = []
-let filteredCoins = []
+let coinsData = [];
+let filteredArray = []
+let limit_obj = {};
 
+const market_cap_filter = document.getElementById("saveMarketCapValue");
+market_cap_filter.addEventListener("click", filter);
+
+const price_filter = document.getElementById("savePriceValue");
+price_filter.addEventListener("click", filter);
+
+function filter() {
+  // Get all marketcap of coins
+  const market_caps = getMarketCapLists();
+
+  // Set max and min from input
+  limit_obj.market_cap.min = document.getElementById("inputMarketCapMin").value;
+  limit_obj.market_cap.max = document.getElementById("inputMarketCapMax").value;
+  limit_obj.price.min = document.getElementById("inputPriceMin").value;
+  limit_obj.price.max = document.getElementById("inputPriceMax").value;
+
+  // Check if input is empty
+  if (limit_obj.market_cap.min == "") { limit_obj.market_cap.min = Math.min(...getMarketCapLists()); }
+  if (limit_obj.market_cap.max == "") { limit_obj.market_cap.max = Math.max(...getMarketCapLists()); }
+  if (limit_obj.price.min == "") { limit_obj.price.min = Math.min(...getPriceLists()); }
+  if (limit_obj.price.max == "") { limit_obj.price.max = Math.max(...getPriceLists()); }
+
+  // Filter array
+  filteredArray = filterCoins(coinsData, limit_obj);
+
+  // display array filtered 
+  displayCoins(filteredArray);
+}
+
+// get list of all market caps
+function getMarketCapLists() {
+  return coinsData.map(coin => {
+    return coin.quote.USD.market_cap;
+  });
+}
+
+// get list of all prices
+function getPriceLists() {
+  return coinsData.map(coin => {
+    return coin.quote.USD.price;
+  });
+}
+
+// filter coins by limit object value
+function filterCoins(coins, limit_obj) {
+  return coins.filter((coin) => {
+    return (coin.quote.USD.price <= limit_obj.price.max && coin.quote.USD.price >= limit_obj.price.min)
+      && (coin.quote.USD.market_cap <= limit_obj.market_cap.max && coin.quote.USD.market_cap >= limit_obj.market_cap.min);
+  });
+}
+
+// load coin from API
 const loadCoins = async () => {
   try {
     const res = await fetch(COIN_RANKING_API_URL_CMC);
     const dataResponse = await res.json();
     coinsData = dataResponse.data;
+    limit_obj = {
+      market_cap: {
+        min: Math.min(...getMarketCapLists()),
+        max: Math.max(...getMarketCapLists())
+      },
+      price: {
+        min: Math.min(...getPriceLists()),
+        max: Math.max(...getPriceLists())
+      }
+    }
+    console.log(limit_obj);
     displayCoins(dataResponse.data);
   } catch (error) {
     console.log(error);
   }
 }
 
+// display coin in a table format
 const displayCoins = (coins) => {
   const htmlString = coins.map((coin) => {
     return `
