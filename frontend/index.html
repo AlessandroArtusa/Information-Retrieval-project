@@ -167,9 +167,20 @@
                                                 <label for="inputMin" class="form-label">Min</label>
                                                 <input type="number" class="form-control" id="inputMarketCapMin" aria-describedby="minMarketCap">
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-4">
                                                 <label for="inputMax" class="form-label">Max</label>
                                                 <input type="number" class="form-control" id="inputMarketCapMax" aria-describedby="maxMarketCap">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="automaticValues" class="form-label">Recommended range</label>
+                                                <div class="btn-group d-flex flex-wrap">
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="0-1000000-marketcap">0 - 1M</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="1000000-10000000-marketcap">1M - 10M</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="10000000-100000000-marketcap">10M - 100M</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="100000000-1000000000-marketcap">100M - 1B</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="1000000000-10000000000-marketcap">1B - 10B</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="10000000000-100000000000-marketcap">10B - 100B</button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -197,9 +208,20 @@
                                                 <label for="inputMin" class="form-label">Min</label>
                                                 <input type="number" class="form-control" id="inputPriceMin" aria-describedby="minPrice">
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-4">
                                                 <label for="inputMax" class="form-label">Max</label>
                                                 <input type="number" class="form-control" id="inputPriceMax" aria-describedby="maxPrice">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="automaticValues" class="form-label">Recommended range</label>
+                                                <div class="btn-group d-flex flex-wrap">
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="0-1-price">0 - 1</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="1-100-price">1 - 100</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="101-1000-price">101 - 1.000</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="1000-3000-price">1.000 - 3.000</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="3001-5000-price">3.001 - 5.000</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="5001-10000-price">5.001 - 10.000</button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">

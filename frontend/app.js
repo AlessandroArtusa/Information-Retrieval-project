@@ -11,6 +11,26 @@ market_cap_filter.addEventListener("click", filter);
 const price_filter = document.getElementById("savePriceValue");
 price_filter.addEventListener("click", filter);
 
+const recommend_buttons = document.querySelectorAll("#recommend-button");
+recommend_buttons.forEach( (e) => {
+  e.addEventListener("click", () => {
+    let button_value = e.value.split("-");
+    let min = button_value[0];
+    let max = button_value[1];
+    let attribute = button_value[2];
+    switch(attribute) {
+      case "marketcap":
+        document.getElementById("inputMarketCapMin").value = min;
+        document.getElementById("inputMarketCapMax").value = max;
+        break;
+      case "price":
+        document.getElementById("inputPriceMin").value = min;
+        document.getElementById("inputPriceMax").value = max;
+        break;
+    }
+  });
+});
+
 function filter() {
   // Get all marketcap of coins
   const market_caps = getMarketCapLists();
@@ -72,7 +92,6 @@ const loadCoins = async () => {
         max: Math.max(...getPriceLists())
       }
     }
-    console.log(limit_obj);
     displayCoins(dataResponse.data);
   } catch (error) {
     console.log(error);
