@@ -246,23 +246,32 @@ function color_percent(num) {
 
 // display coin in a table format
 const displayCoins = (coins) => {
-  const htmlString = coins.map((coin) => {
-    return `
-    <tr>
-      <td>${coin.source}</td>
-      <td>${coin.name}</td>
-      <td><img style="width=24px; height: 24px" src="${coin.logo_url}"></td>
-      <td>${coin.symbol}</td>` +
-      color_percent(coin.percent_change_1h) +
-      color_percent(coin.percent_change_24h) +
-      color_percent(coin.percent_change_7d) +
-      ` <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.price)}</td>
-      <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.market_cap)}</td>
-    </tr>
-    `
-  })
-    .join('');
-  coinList.innerHTML = htmlString
+  if (coins.length == 0) {
+    alert("No Results Found!");
+  } else {
+    const htmlString = coins.map((coin) => {
+      return `
+      <tr>
+        <td>${coin.source}</td>
+        <td>${coin.name}</td>
+        <td><img style="width=24px; height: 24px" src="${coin.logo_url}"></td>
+        <td>${coin.symbol}</td>` +
+        color_percent(coin.percent_change_1h) +
+        color_percent(coin.percent_change_24h) +
+        color_percent(coin.percent_change_7d) +
+        ` <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.price)}</td>
+        <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.market_cap)}</td>
+        <td>
+          <button class="btn btn-danger">
+            <i class="fa fa-thumbs-down"> </i>
+          </button>
+        </td>
+      </tr>
+      `
+    })
+      .join('');
+    coinList.innerHTML = htmlString
+  }
 }
 
 function displayRecommended(rec_arr) {
