@@ -1,5 +1,3 @@
-import os
-
 # Scrapy settings for coinranking project
 #
 # For simplicity, this file contains only settings considered important or
@@ -14,16 +12,16 @@ BOT_NAME = "scraper"
 SPIDER_MODULES = ["scraper.spiders"]
 NEWSPIDER_MODULE = "scraper.spiders"
 
-# Get the absolute path of the current directory
-current_dir = os.path.abspath(os.path.dirname(__file__))
+# # Get the absolute path of the current directory
+# current_dir = os.path.abspath(os.path.dirname(__file__))
 
-# Specify the absolute path for the output file in the parent directory
-parent_dir = os.path.join(current_dir, os.pardir)
-output_file_path = os.path.join(parent_dir, "scraper_output.jsonl")
+# # Specify the absolute path for the output file in the parent directory
+# parent_dir = os.path.join(current_dir, os.pardir)
+# output_file_path = os.path.join(parent_dir, "scraper_output.jsonl")
 
 # output
 FEEDS = {
-    output_file_path: {
+    "../scraper_output.jsonl": {
         "format": "jsonl",
         "overwrite": False,  # Set to True if you want to overwrite the file on each run
     },
