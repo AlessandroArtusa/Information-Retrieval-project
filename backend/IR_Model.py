@@ -77,9 +77,7 @@ def search_and_feedback(query):
 
         # Write the JSON content to a file
         write_json_to_file(json_data, 'search_results.json')
-    else:
-        write_json_to_file({}, 'search_results.json');
-        
+    
 def collect_user_feedback(results):
     relevant_docs = []
     print("\nPlease provide feedback on the relevance of the search results:")
