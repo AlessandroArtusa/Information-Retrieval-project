@@ -17,6 +17,14 @@ BOT_NAME = "coinMarketCap"
 SPIDER_MODULES = ["coinMarketCap.spiders"]
 NEWSPIDER_MODULE = "coinMarketCap.spiders"
 
+# output
+FEEDS = {
+    "../scraper_output.jsonl": {
+        "format": "jsonl",
+        "overwrite": False,  # Set to True if you want to overwrite the file on each run
+    },
+}
+
 # settings.py
 # Enable Selenium
 SELENIUM_DRIVER = "chrome"  # Options: chrome, firefox
