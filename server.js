@@ -58,22 +58,7 @@ app.get("/list", async (req, res) => {
 app.get("/index", (req, res) => {
 
   // Run the Python script and wait for completion
-  runPythonScript('Eth', (error) => {
-    if (error) {
-      res.status(500).send('Error executing Python script');
-    } else {
-      // Send the HTML file after the Python script has completed
-      res.sendFile('frontend/index.html', { root: __dirname });
-    }
-  });
-});
-
-app.get("/index/:query", (req, res) => {
-  // Get the parameter from the query string or request body
-  const parameter = req.params.query;
-
-  // Run the Python script and wait for completion with the parameter
-  runPythonScript(parameter, (error) => {
+  runPythonScript('', (error) => {
     if (error) {
       res.status(500).send('Error executing Python script');
     } else {

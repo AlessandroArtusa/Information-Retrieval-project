@@ -7,7 +7,7 @@ let limit_obj = {};
 const search_button = document.getElementById("queryForm");
 search_button.addEventListener("submit", (e) => {
   e.preventDefault();
-  addRelevanceButton();
+  handleQuery();
 });
 
 const market_cap_filter = document.getElementById("saveMarketCapValue");
@@ -67,7 +67,7 @@ recommend_buttons.forEach( (e) => {
   });
 });
 
-function addRelevanceButton() {
+function handleQuery() {
   let relevanceButtons = `  <button id="positveOutcomeButton" class="btn btn-success me-1" type="button">
                              <i class="fa fa-thumbs-up"></i>
                             </button>
@@ -84,6 +84,7 @@ function addRelevanceButton() {
                         <small class="text-muted">Results got from query: "${query}"</small>
                       </h6>`
   table_buttons.insertAdjacentHTML("beforeEnd", query_result);
+  window.location.href = `/index/${query}`;
 }
 
 function filter() {
