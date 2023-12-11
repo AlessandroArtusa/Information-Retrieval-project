@@ -121,8 +121,12 @@
                             <i class="fa fa-filter"> </i> Filter
                         </button>
                         <h6 id="queryPrinter" class="d-flex flex-column justify-content-center me-2 mb-0">
-                            <small class="text-muted">Results got from query: ! Got no query !</small>
-                        </h6>`
+                            <% if (query && query.length > 0) { %>
+                              <small class="text-muted">Results got from query: <%= query %></small>
+                            <% } else { %>
+                              <small class="text-muted">! Got no query !</small>
+                            <% } %>
+                          </h6>
                     </div>
                     <div class="collapse mt-3 mb-3" id="collapseExample">
                         <div class="btn-group d-flex" role="group" aria-label="Button group">

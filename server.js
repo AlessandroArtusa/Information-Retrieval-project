@@ -70,19 +70,20 @@ app.get("/search", (req, res) => {
 
     // After script execution, reload the view with updated data
     // Assuming the script modifies a file or data that the view will use
-    res.redirect('/index'); // Redirect to the index route
+    // Redirect to the index route with the query as a parameter
+    res.redirect(`/index?query=${encodeURIComponent(init_val)}`); // Redirect to the index route
   });
 });
 
 app.get("/index", (req, res) => {
-
+  const query = req.query.query || ''; 
   // Run the Python script and wait for completion
   runPythonScript(init_val, (error) => {
     if (error) {
       res.status(500).send('Error executing Python script');
     } else {
       // Send the HTML file after the Python script has completed
-      res.render('index'); 
+      res.render('index', {query: query}); 
     }
   });
 });
