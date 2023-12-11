@@ -26,6 +26,9 @@
                         <form class="d-flex">
                             <input class="form-control me-2" type="text" id="filter" placeholder="Search"
                                 aria-label="Search">
+                            <button id="querySender" class="btn btn-secondary">
+                                <i class="fa fa-search"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -142,15 +145,22 @@
             <div class="col-lg-12 col-md-12">
                 <div class="ml-0 mr-0 mb-2 mt-2 border-bottom">
                     <div class="btn d-flex flex-row-reverse p-0 mb-2">
-                        <button class="btn text-right btn-primary" type="button" data-bs-toggle="collapse"
+                        <button class="btn text-right btn-secondary" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             <i class="fa fa-filter"> </i> Filter
+                        </button>
+                        <button id="positveOutcomeButton" class="btn btn-success me-1" type="button">
+                            <i class="fa fa-thumbs-up"></i>
+                        </button>
+                        <button id="negativeOutcomeButton" class="btn btn-danger me-1" type="button">
+                            <i class="fa fa-thumbs-down"></i>
                         </button>
                     </div>
                     <div class="collapse mt-3 mb-3" id="collapseExample">
                         <div class="btn-group d-flex" role="group" aria-label="Button group">
+                            <!-- MARKET CAP FILTER AND MODAL area start-->
                             <div class="btn-group flex-fill m-1" role="group">
-                                <button type="button" class="btn btn-outline-primary rounded-pill"
+                                <button type="button" class="btn btn-outline-secondary rounded-pill"
                                     data-bs-toggle="modal" data-bs-target="#marketCapModal">
                                     Market Cap
                                 </button>
@@ -190,8 +200,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- PRICE FILTER AND MODAL area start-->
                             <div class="btn-group flex-fill m-1" role="group">
-                                <button type="button" class="btn btn-outline-primary rounded-pill"
+                                <button type="button" class="btn btn-outline-secondary rounded-pill"
                                     data-bs-toggle="modal" data-bs-target="#priceModal">
                                     Price
                                 </button>
@@ -231,6 +242,132 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- 1H % CHANGE FILTER AND MODAL area start-->
+                            <div class="btn-group flex-fill m-1" role="group">
+                                <button type="button" class="btn btn-outline-secondary rounded-pill"
+                                    data-bs-toggle="modal" data-bs-target="#onehModal">
+                                    1h % Change
+                                </button>
+                            </div>
+                            <div class="modal fade" id="onehModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>Insert 1h % Change values to filter elements</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="inputMin" class="form-label">Min</label>
+                                                <input type="number" class="form-control" id="input1hMin" aria-describedby="min1h">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="inputMax" class="form-label">Max</label>
+                                                <input type="number" class="form-control" id="input1hMax" aria-describedby="max1h">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="automaticValues" class="form-label">Recommended range</label>
+                                                <div class="btn-group d-flex flex-wrap">
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="50-100-1h">+50% to 100%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="10-50-1h">+10% to 50%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="0-10-1h">0% to 10%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="n10-0-1h">-10% to 0%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="n50-n10-1h">-50% to 10%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="n100-n50-1h">-100% to -50%</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" id="save1hValue" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 24H % CHANGE FILTER AND MODAL area start-->
+                            <div class="btn-group flex-fill m-1" role="group">
+                                <button type="button" class="btn btn-outline-secondary rounded-pill"
+                                    data-bs-toggle="modal" data-bs-target="#onedModal">
+                                    24h % Change
+                                </button>
+                            </div>
+                            <div class="modal fade" id="onedModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>Insert 24h % Change values to filter elements</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="inputMin" class="form-label">Min</label>
+                                                <input type="number" class="form-control" id="input24hMin" aria-describedby="min24h">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="inputMax" class="form-label">Max</label>
+                                                <input type="number" class="form-control" id="input24hMax" aria-describedby="max24h">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="automaticValues" class="form-label">Recommended range</label>
+                                                <div class="btn-group d-flex flex-wrap">
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="50-100-24h">+50% to 100%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="10-50-24h">+10% to 50%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="0-10-24h">0% to 10%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="n10-0-24h">-10% to 0%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="n50-n10-24h">-50% to 10%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="n100-n50-24h">-100% to -50%</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" id="save24hValue" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 7D % CHANGE FILTER AND MODAL area start-->
+                            <div class="btn-group flex-fill m-1" role="group">
+                                <button type="button" class="btn btn-outline-secondary rounded-pill"
+                                    data-bs-toggle="modal" data-bs-target="#onewModal">
+                                    7d % Change
+                                </button>
+                            </div>
+                            <div class="modal fade" id="onewModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>Insert 7d % Change values to filter elements</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="inputMin" class="form-label">Min</label>
+                                                <input type="number" class="form-control" id="input7dMin" aria-describedby="min7d">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="inputMax" class="form-label">Max</label>
+                                                <input type="number" class="form-control" id="input7dMax" aria-describedby="max7d">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="automaticValues" class="form-label">Recommended range</label>
+                                                <div class="btn-group d-flex flex-wrap">
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="50-100-7d">+50% to 100%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="10-50-7d">+10% to 50%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="0-10-7d">0% to 10%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="n10-0-7d">-10% to 0%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="n50-n10-7d">-50% to 10%</button>
+                                                    <button type="button" id="recommend-button" class="btn btn-light mx-4 mb-3" value="n100-n50-7d">-100% to -50%</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" id="save7dValue" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- Modal -->
 
@@ -241,6 +378,9 @@
                         <tr class="text-muted">
                             <th>Name</th>
                             <th>Rank</th>
+                            <th>1h %</th>
+                            <th>24h %</th>
+                            <th>7d %</th>
                             <th>Price</th>
                             <th>Market Cap</th>
                             <th>Symbol</th>
