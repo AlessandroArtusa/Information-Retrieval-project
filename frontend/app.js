@@ -1,4 +1,3 @@
-const COIN_RANKING_API_URL_CMC = "http://localhost:8888/coins/coinmarketcap"
 const coinList = document.getElementById("data");
 
 let coinsData = [];
@@ -74,8 +73,7 @@ function addRelevanceButton() {
                             </button>
                             <button id="negativeOutcomeButton" class="btn btn-danger me-1" type="button">
                               <i class="fa fa-thumbs-down"></i>
-                            </button>`;
-  console.log(relevanceButtons);
+                            </button>`;console.log(relevanceButtons);
   let table_buttons = document.getElementById("table-buttons");
   if (table_buttons.querySelectorAll("button").length == 1) {
     table_buttons.insertAdjacentHTML("beforeEnd", relevanceButtons);
@@ -89,9 +87,6 @@ function addRelevanceButton() {
 }
 
 function filter() {
-  // Get all marketcap of coins
-  const market_caps = getMarketCapLists();
-
   // Set max and min from input
   limit_obj.market_cap.min = document.getElementById("inputMarketCapMin").value;
   limit_obj.market_cap.max = document.getElementById("inputMarketCapMax").value;
@@ -104,17 +99,21 @@ function filter() {
   limit_obj.oneW.min = document.getElementById("input7dMin").value;
   limit_obj.oneW.max = document.getElementById("input7dMax").value;
 
+  console.log(limit_obj);
+
   // Check if input is empty
-  if (limit_obj.market_cap.min == "") { limit_obj.market_cap.min = Math.min(...getMarketCapLists()); }
-  if (limit_obj.market_cap.max == "") { limit_obj.market_cap.max = Math.max(...getMarketCapLists()); }
-  if (limit_obj.price.min == "") { limit_obj.price.min = Math.min(...getPriceLists()); }
-  if (limit_obj.price.max == "") { limit_obj.price.max = Math.max(...getPriceLists()); }
-  if (limit_obj.oneH.min == "") { limit_obj.oneH.min = Math.min(...get1hLists()); }
-  if (limit_obj.oneH.max == "") { limit_obj.oneH.max = Math.max(...get1hLists()); }
-  if (limit_obj.oneD.min == "") { limit_obj.oneD.min = Math.min(...get24hLists()); }
-  if (limit_obj.oneD.max == "") { limit_obj.oneD.max = Math.max(...get24hLists()); }
-  if (limit_obj.oneW.min == "") { limit_obj.oneW.min = Math.min(...get7dLists()); }
-  if (limit_obj.oneW.max == "") { limit_obj.oneW.max = Math.max(...get7dLists()); }
+  if (limit_obj.market_cap.min == "") { limit_obj.market_cap.min = Math.min(...getMarketCapLists().filter(function(n) { return !isNaN(n); })); }
+  if (limit_obj.market_cap.max == "") { limit_obj.market_cap.max = Math.max(...getMarketCapLists().filter(function(n) { return !isNaN(n); })); }
+  if (limit_obj.price.min == "") { limit_obj.price.min = Math.min(...getPriceLists().filter(function(n) { return !isNaN(n); })); }
+  if (limit_obj.price.max == "") { limit_obj.price.max = Math.max(...getPriceLists().filter(function(n) { return !isNaN(n); })); }
+  if (limit_obj.oneH.min == "") { limit_obj.oneH.min = Math.min(...get1hLists().filter(function(n) { return !isNaN(n); })); }
+  if (limit_obj.oneH.max == "") { limit_obj.oneH.max = Math.max(...get1hLists().filter(function(n) { return !isNaN(n); })); }
+  if (limit_obj.oneD.min == "") { limit_obj.oneD.min = Math.min(...get24hLists().filter(function(n) { return !isNaN(n); })); }
+  if (limit_obj.oneD.max == "") { limit_obj.oneD.max = Math.max(...get24hLists().filter(function(n) { return !isNaN(n); })); }
+  if (limit_obj.oneW.min == "") { limit_obj.oneW.min = Math.min(...get7dLists().filter(function(n) { return !isNaN(n); })); }
+  if (limit_obj.oneW.max == "") { limit_obj.oneW.max = Math.max(...get7dLists().filter(function(n) { return !isNaN(n); })); }
+
+  console.log(limit_obj);
 
   // Filter array
   filteredArray = filterCoins(coinsData, limit_obj);
@@ -126,52 +125,59 @@ function filter() {
 // get list of all market caps
 function getMarketCapLists() {
   return coinsData.map(coin => {
-    return coin.quote.USD.market_cap;
+    return coin.market_cap;
   });
 }
 
 // get list of all prices
 function getPriceLists() {
   return coinsData.map(coin => {
-    return coin.quote.USD.price;
+    return coin.price;
   });
 }
 
 function get1hLists() {
   return coinsData.map(coin => {
-    return coin.quote.USD.percent_change_1h;
+    return coin.percent_change_1h;
   });
 }
 
 function get24hLists() {
   return coinsData.map(coin => {
-    return coin.quote.USD.percent_change_24h;
+    return coin.percent_change_24h;
   });
 }
 
 function get7dLists() {
   return coinsData.map(coin => {
-    return coin.quote.USD.percent_change_7d;
+    return coin.percent_change_7d;
   });
 }
 
 // filter coins by limit object value
 function filterCoins(coins, limit_obj) {
   return coins.filter((coin) => {
-    return (coin.quote.USD.price <= limit_obj.price.max && coin.quote.USD.price >= limit_obj.price.min)
-      && (coin.quote.USD.market_cap <= limit_obj.market_cap.max && coin.quote.USD.market_cap >= limit_obj.market_cap.min)
-      && (coin.quote.USD.percent_change_1h <= limit_obj.oneH.max && coin.quote.USD.percent_change_1h >= limit_obj.oneH.min)
-      && (coin.quote.USD.percent_change_24h <= limit_obj.oneD.max && coin.quote.USD.percent_change_24h >= limit_obj.oneD.min)
-      && (coin.quote.USD.percent_change_7d <= limit_obj.oneW.max && coin.quote.USD.percent_change_7d >= limit_obj.oneW.min)
+    return (coin.price <= limit_obj.price.max && coin.price >= limit_obj.price.min)
+      && (coin.market_cap <= limit_obj.market_cap.max && coin.market_cap >= limit_obj.market_cap.min)
+      && (coin.percent_change_1h <= limit_obj.oneH.max && coin.percent_change_1h >= limit_obj.oneH.min)
+      && (coin.percent_change_24h <= limit_obj.oneD.max && coin.percent_change_24h >= limit_obj.oneD.min)
+      && (coin.percent_change_7d <= limit_obj.oneW.max && coin.percent_change_7d >= limit_obj.oneW.min)
   });
 }
 
 // load coin from API
 const loadCoins = async () => {
   try {
-    const res = await fetch(COIN_RANKING_API_URL_CMC);
-    const dataResponse = await res.json();
-    coinsData = dataResponse.data;
+    const res = await fetch('http://localhost:8888/list');
+    coinsData = await res.json();
+    coinsData.forEach(e => {
+      e.price = parseFloat(e.price.substring(1).replaceAll(",", ""));
+      e.market_cap = parseInt(e.market_cap.substring(1).replaceAll(",", ""));
+      e.percent_change_1h = parseFloat(e.percent_change_1h);
+      e.percent_change_24h = parseFloat(e.percent_change_24h);
+      e.percent_change_7d = parseFloat(e.percent_change_7d);
+    });
+    console.log(coinsData);
     limit_obj = {
       market_cap: {
         min: Math.min(...getMarketCapLists()),
@@ -194,7 +200,7 @@ const loadCoins = async () => {
         max: Math.max(...get7dLists())
       }
     }
-    displayCoins(dataResponse.data);
+    displayCoins(coinsData);
   } catch (error) {
     console.log(error);
   }
@@ -213,16 +219,15 @@ const displayCoins = (coins) => {
   const htmlString = coins.map((coin) => {
     return `
     <tr>
-      <td>CoinMarketCap</td>
+      <td>${coin.source}</td>
       <td>${coin.name}</td>
-      <td>Logo</td>
-      <td>${coin.symbol}</td>
-      <td>${coin.cmc_rank}</td>` +
-      color_percent(coin.quote.USD.percent_change_1h.toFixed(2)) +
-      color_percent(coin.quote.USD.percent_change_24h.toFixed(2)) +
-      color_percent(coin.quote.USD.percent_change_7d.toFixed(2)) +
-      ` <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.quote.USD.price)}</td>
-      <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.quote.USD.market_cap)}</td>
+      <td><img style="width=24px; height: 24px" src="${coin.logo_url}"></td>
+      <td>${coin.symbol}</td>` +
+      color_percent(coin.percent_change_1h) +
+      color_percent(coin.percent_change_24h) +
+      color_percent(coin.percent_change_7d) +
+      ` <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.price)}</td>
+      <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.market_cap)}</td>
     </tr>
     `
   })
