@@ -246,7 +246,7 @@ function color_percent(num) {
 
 // display coin in a table format
 const displayCoins = (coins) => {
-  if (coins.length == 0) {
+  if (coinsData.length == 0) {
     alert("No Results Found!");
   } else {
     const htmlString = coins.map((coin) => {
