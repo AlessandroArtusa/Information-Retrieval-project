@@ -1,4 +1,4 @@
-# Scrapy settings for coingecko project
+# Scrapy settings for coinranking project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,10 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "coingecko"
+BOT_NAME = "coinranking"
 
-SPIDER_MODULES = ["coingecko.spiders"]
-NEWSPIDER_MODULE = "coingecko.spiders"
+SPIDER_MODULES = ["coinranking.spiders"]
+NEWSPIDER_MODULE = "coinranking.spiders"
 
 # output
 FEEDS = {
@@ -32,7 +32,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 10
+# DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
@@ -52,15 +52,13 @@ COOKIES_ENABLED = False
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    "coingecko.middlewares.CoingeckoSpiderMiddleware": 543,
+#    "coinranking.middlewares.CoinrankingSpiderMiddleware": 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#     "coingecko.middlewares.CoingeckoDownloaderMiddleware": 543,
-#     "scrapy.downloadermiddlewares.useragent.UserAgentMiddleware": None,
-#     "scrapy_user_agents.middlewares.RandomUserAgentMiddleware": 400,
+#    "coinranking.middlewares.CoinrankingDownloaderMiddleware": 543,
 # }
 
 # Enable or disable extensions
@@ -72,7 +70,7 @@ COOKIES_ENABLED = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 # ITEM_PIPELINES = {
-#    "coingecko.pipelines.CoingeckoPipeline": 300,
+#    "coinranking.pipelines.CoinrankingPipeline": 300,
 # }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

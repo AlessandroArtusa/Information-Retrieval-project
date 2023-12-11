@@ -8,6 +8,12 @@ class GeckospiderSpider(scrapy.Spider):
     start_urls = ["https://www.coingecko.com/"]
     pages_to_scrape = 2
 
+    def get_percent_change(self, element):
+        percent_change_value = element.xpath("text()").get()
+        if element.xpath("i/@class").get() == "fas fa-fw fa-caret-down":
+            percent_change_value = "-" + percent_change_value
+        return percent_change_value
+
     def parse(self, response):
         rows = response.xpath("/html/body/div[2]/main/div/div[5]/table/tbody/tr")
         for row in rows:
@@ -15,9 +21,16 @@ class GeckospiderSpider(scrapy.Spider):
             name = row.xpath("td[3]/a/div/div/text()").get()
             symbol = row.xpath("td[3]/a/div/div/div/text()").get()
             price = row.xpath("td[5]/span/text()").get()
-            percent_change_1h = row.xpath("td[6]/span/text()").get()
-            percent_change_24h = row.xpath("td[7]/span/text()").get()
-            percent_change_7d = row.xpath("td[8]/span/text()").get()
+
+            percent_change_1h_element = row.xpath("td[6]/span")
+            percent_change_1h = self.get_percent_change(percent_change_1h_element)
+
+            percent_change_24h_element = row.xpath("td[7]/span")
+            percent_change_24h = self.get_percent_change(percent_change_24h_element)
+
+            percent_change_7d_element = row.xpath("td[8]/span")
+            percent_change_7d = self.get_percent_change(percent_change_7d_element)
+
             volume_change_24h = row.xpath("td[10]/span/text()").get()
             market_cap = row.xpath("td[11]/span/text()").get()
             logo_url = row.xpath("td[3]/a/img/@src").get()
