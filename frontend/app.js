@@ -5,6 +5,12 @@ let coinsData = [];
 let filteredArray = []
 let limit_obj = {};
 
+const search_button = document.getElementById("queryForm");
+search_button.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addRelevanceButton();
+});
+
 const market_cap_filter = document.getElementById("saveMarketCapValue");
 market_cap_filter.addEventListener("click", filter);
 
@@ -61,6 +67,26 @@ recommend_buttons.forEach( (e) => {
     }
   });
 });
+
+function addRelevanceButton() {
+  let relevanceButtons = `  <button id="positveOutcomeButton" class="btn btn-success me-1" type="button">
+                             <i class="fa fa-thumbs-up"></i>
+                            </button>
+                            <button id="negativeOutcomeButton" class="btn btn-danger me-1" type="button">
+                              <i class="fa fa-thumbs-down"></i>
+                            </button>`;
+  console.log(relevanceButtons);
+  let table_buttons = document.getElementById("table-buttons");
+  if (table_buttons.querySelectorAll("button").length == 1) {
+    table_buttons.insertAdjacentHTML("beforeEnd", relevanceButtons);
+  }
+  document.getElementById("queryPrinter").remove();
+  let query = document.querySelector("#filter").value;
+  let query_result = `<h6 id="queryPrinter" class="d-flex flex-column justify-content-center me-3 mb-0">
+                        <small class="text-muted">Results got from query: "${query}"</small>
+                      </h6>`
+  table_buttons.insertAdjacentHTML("beforeEnd", query_result);
+}
 
 function filter() {
   // Get all marketcap of coins
@@ -187,19 +213,16 @@ const displayCoins = (coins) => {
   const htmlString = coins.map((coin) => {
     return `
     <tr>
+      <td>CoinMarketCap</td>
       <td>${coin.name}</td>
+      <td>Logo</td>
+      <td>${coin.symbol}</td>
       <td>${coin.cmc_rank}</td>` +
       color_percent(coin.quote.USD.percent_change_1h.toFixed(2)) +
       color_percent(coin.quote.USD.percent_change_24h.toFixed(2)) +
       color_percent(coin.quote.USD.percent_change_7d.toFixed(2)) +
       ` <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.quote.USD.price)}</td>
       <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coin.quote.USD.market_cap)}</td>
-      <td>${coin.symbol}</td>
-      <td>
-      <a href="https://coinmarketcap.com/currencies/${coin.slug}/" target="_blank">
-      <i class="fas fa-chart-line"></i>
-      </a>
-      </td>
     </tr>
     `
   })

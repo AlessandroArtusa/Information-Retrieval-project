@@ -23,10 +23,10 @@
                         <h3 class="text-black-50 text-uppercase m-0">Coin Ranking</h3>
                     </div>
                     <div class="col-md-5 ms-auto">
-                        <form class="d-flex">
+                        <form id="queryForm" class="d-flex">
                             <input class="form-control me-2" type="text" id="filter" placeholder="Search"
                                 aria-label="Search">
-                            <button id="querySender" class="btn btn-secondary">
+                            <button class="btn btn-secondary">
                                 <i class="fa fa-search"></i>
                             </button>
                         </form>
@@ -144,17 +144,14 @@
             <!--table area start-->
             <div class="col-lg-12 col-md-12">
                 <div class="ml-0 mr-0 mb-2 mt-2 border-bottom">
-                    <div class="btn d-flex flex-row-reverse p-0 mb-2">
+                    <div id="table-buttons" class="btn d-flex flex-row-reverse p-0 mb-2">
                         <button class="btn text-right btn-secondary" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             <i class="fa fa-filter"> </i> Filter
                         </button>
-                        <button id="positveOutcomeButton" class="btn btn-success me-1" type="button">
-                            <i class="fa fa-thumbs-up"></i>
-                        </button>
-                        <button id="negativeOutcomeButton" class="btn btn-danger me-1" type="button">
-                            <i class="fa fa-thumbs-down"></i>
-                        </button>
+                        <h6 id="queryPrinter" class="d-flex flex-column justify-content-center me-2 mb-0">
+                            <small class="text-muted">Results got from query: ! Got no query !</small>
+                        </h6>`
                     </div>
                     <div class="collapse mt-3 mb-3" id="collapseExample">
                         <div class="btn-group d-flex" role="group" aria-label="Button group">
@@ -373,18 +370,19 @@
 
                     </div>
                 </div>
-                <table class="table text-center">
+                <table class="table text-center" aria-describedby="coinsTable">
                     <thead>
                         <tr class="text-muted">
+                            <th>Source</th>
                             <th>Name</th>
+                            <th>Logo</th>
+                            <th>Symbol</th>
                             <th>Rank</th>
                             <th>1h %</th>
                             <th>24h %</th>
                             <th>7d %</th>
                             <th>Price</th>
                             <th>Market Cap</th>
-                            <th>Symbol</th>
-                            <th>Coin Detail</th>
                         </tr>
                     </thead>
                     <tbody id="data">
