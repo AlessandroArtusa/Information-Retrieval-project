@@ -24,6 +24,7 @@ class CoinrankingspiderSpider(scrapy.Spider):
                 "market_cap": market_cap.strip(),
                 "percent_change_24h": percent_change_24h.strip(),
                 "logo_url": logo_url,
+                "source": "coinranking"
             }
 
         if self.pages_to_scrape > 1:

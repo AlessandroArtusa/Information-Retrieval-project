@@ -1,0 +1,6 @@
+To scrape coinmarketcap.com we need to overcome lazyloading, which
+is a process where only the content that is currently visible on the
+page is loaded (to get the remaining content we would need to scroll 
+down).
+
+To run the python script 'run_spider.py' the pyOpenSSL library is needed.
