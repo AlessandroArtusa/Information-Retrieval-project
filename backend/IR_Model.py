@@ -58,18 +58,14 @@ def create_and_index_data(df):
 # Create the index
 index_ref = create_and_index_data(df)
 
-#  Function to search cryptocurrencies and collect feedback
+# Function to search cryptocurrencies and automatically mark all as relevant
 def search_and_feedback(query):
     # Directly filter the DataFrame for names containing the query substring
     filtered_results = df[df['name'].str.contains(query, case=False, na=False)].copy()
 
     if not filtered_results.empty:
-        # Collect user feedback on relevance
-        feedback = collect_user_feedback(filtered_results)
-        
-        # Re-rank the results based on feedback
-        filtered_results['relevant'] = filtered_results['docno'].isin(feedback)
-        filtered_results.sort_values(by='relevant', ascending=False, inplace=True)
+        # Automatically mark all documents as relevant
+        filtered_results['relevant'] = True
 
         # Provide automatic recommendations
         recommendations = get_recommendations(query)
@@ -81,6 +77,7 @@ def search_and_feedback(query):
         write_json_to_file(json_data, 'search_results.json')
     else:
         print("No results found")
+
         
 def collect_user_feedback(results):
     relevant_docs = []
@@ -168,7 +165,19 @@ def create_json_results(results, recommendations):
 def write_json_to_file(data, filename):
     with open(filename, 'w') as file:
         json.dump(data, file, indent=4)
+        
+# Function to handle feedback from HTML page
+def handle_html_feedback(docno, is_relevant):
+    # Update the relevance of the specific document
+    df.loc[df['docno'] == docno, 'relevant'] = is_relevant
+
+    # Assume you want to regenerate recommendations and JSON file after feedback
+    recommendations = get_recommendations("Your Query Here")
+    json_data = create_json_results(df, recommendations)
+    write_json_to_file(json_data, 'search_results.json')
+
 
 
 # Example Usage
-search_and_feedback("Coin")
+search_and_feedback("")
+handle_html_feedback(4, False)
