@@ -169,7 +169,8 @@ function filterCoins(coins, limit_obj) {
 const loadCoins = async () => {
   try {
     const res = await fetch('http://localhost:8888/list');
-    coinsData = await res.json();
+    let responseData = await res.json();
+    coinsData = responseData.results;
     coinsData.forEach(e => {
       e.price = parseFloat(e.price.substring(1).replaceAll(",", ""));
       e.market_cap = parseInt(e.market_cap.substring(1).replaceAll(",", ""));

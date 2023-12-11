@@ -9,7 +9,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # Run the run_spiders.py script
 try:
-    subprocess.run(["python3", "../run_spiders.py"], check=True)
+    subprocess.run(["python3", "./run_spiders.py"], check=True)
 except subprocess.CalledProcessError as e:
     print("Failed to run run_spiders.py")
     print(e)
@@ -28,7 +28,7 @@ def read_jsonl_data(file_path):
     return data
 
 # Load JSONL data
-jsonl_file_path = '../scraper_output.jsonl'
+jsonl_file_path = './scraper_output.jsonl'
 data = read_jsonl_data(jsonl_file_path)
 
 # Prepare data with key checks
@@ -200,7 +200,6 @@ if __name__ == "__main__":
     
     # Parse arguments
     args = parser.parse_args()
-    print(args.param1)
 
     # Call the function with parsed arguments
     search_and_feedback(args.param1)

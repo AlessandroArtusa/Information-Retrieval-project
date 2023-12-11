@@ -16,11 +16,12 @@ app.use(express.static(__dirname + '/frontend'));
 
 //routes
 
-const runPythonScript = (callback) => {
-  const pythonScriptPath = 'run_spiders.py';
+const runPythonScript = (parameter, callback) => {
+  const pythonScriptPath = 'backend/IR_Model.py';
+  const param = parameter;
 
   // Execute the Python script
-  exec(`python ${pythonScriptPath}`, (error, stdout, stderr) => {
+  exec(`python3 ${pythonScriptPath} "${param}"`, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error executing Python script: ${error.message}`);
       callback(error);
@@ -33,37 +34,19 @@ const runPythonScript = (callback) => {
   });
 };
 
-const readJSONLines = async (filePath) => {
-  const lines = readline.createInterface({
-    input: fs.createReadStream(filePath),
-    crlfDelay: Infinity,
-  });
-
-  const dataArray = [];
-
-  for await (const line of lines) {
-    try {
-      const jsonData = JSON.parse(line);
-      dataArray.push(jsonData);
-    } catch (error) {
-      console.error(`Error parsing JSON line: ${error.message}`);
-    }
-  }
-
-  return dataArray;
-};
-
 app.get("/list", async (req, res) => {
   try {
-    const jsonFilePath = './scraper_output.jsonl';
+    const jsonFilePath = './search_results.json';
 
-    // Read the content of the JSON file
-    readJSONLines(jsonFilePath)
-    .then((dataArray) => {
-      res.json(dataArray);
-    })
-    .catch((error) => {
-      console.error(`Error reading JSON Lines file: ${error.message}`);
+    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+      if (err) {
+        console.error(`Error reading JSON file: ${err.message}`);
+        return;
+      }
+    
+      // Parse the JSON data
+      const jsonData = JSON.parse(data);
+      res.json(jsonData);
     });
 
   } catch (error) {
@@ -75,7 +58,22 @@ app.get("/list", async (req, res) => {
 app.get("/index", (req, res) => {
 
   // Run the Python script and wait for completion
-  runPythonScript((error) => {
+  runPythonScript('Eth', (error) => {
+    if (error) {
+      res.status(500).send('Error executing Python script');
+    } else {
+      // Send the HTML file after the Python script has completed
+      res.sendFile('frontend/index.html', { root: __dirname });
+    }
+  });
+});
+
+app.get("/index/:query", (req, res) => {
+  // Get the parameter from the query string or request body
+  const parameter = req.params.query;
+
+  // Run the Python script and wait for completion with the parameter
+  runPythonScript(parameter, (error) => {
     if (error) {
       res.status(500).send('Error executing Python script');
     } else {

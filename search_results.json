@@ -1,0 +1,286 @@
+{
+    "results": [
+        {
+            "docno": "2",
+            "name": "Ethereum",
+            "symbol": "ETH",
+            "price": "$2,176.98",
+            "market_cap": "$261,187,297,300",
+            "percent_change_1h": "0.0%",
+            "percent_change_24h": "-7.6%",
+            "percent_change_7d": "-2.1%",
+            "logo_url": "https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628",
+            "source": "coingecko"
+        },
+        {
+            "docno": "3",
+            "name": "Tether",
+            "symbol": "USDT",
+            "price": "$0.992586",
+            "market_cap": "$89,874,125,017",
+            "percent_change_1h": "-0.7%",
+            "percent_change_24h": "-0.7%",
+            "percent_change_7d": "-0.7%",
+            "logo_url": "https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661",
+            "source": "coingecko"
+        },
+        {
+            "docno": "8",
+            "name": "Lido Staked Ether",
+            "symbol": "STETH",
+            "price": "$2,177.75",
+            "market_cap": "$20,060,357,705",
+            "percent_change_1h": "-0.1%",
+            "percent_change_24h": "-7.5%",
+            "percent_change_7d": "-2.0%",
+            "logo_url": "https://assets.coingecko.com/coins/images/13442/standard/steth_logo.png?1696513206",
+            "source": "coingecko"
+        },
+        {
+            "docno": "26",
+            "name": "Ethereum Classic",
+            "symbol": "ETC",
+            "price": "$19.63",
+            "market_cap": "$2,802,456,699",
+            "percent_change_1h": "-0.3%",
+            "percent_change_24h": "-10.5%",
+            "percent_change_7d": "-0.3%",
+            "logo_url": "https://assets.coingecko.com/coins/images/453/standard/ethereum-classic-logo.png?1696501717",
+            "source": "coingecko"
+        },
+        {
+            "docno": "54",
+            "name": "Rocket Pool ETH",
+            "symbol": "RETH",
+            "price": "$2,382.42",
+            "market_cap": "$1,291,368,646",
+            "percent_change_1h": "-0.2%",
+            "percent_change_24h": "-7.6%",
+            "percent_change_7d": "-2.2%",
+            "logo_url": "https://assets.coingecko.com/coins/images/20764/standard/reth.png?1696520159",
+            "source": "coingecko"
+        },
+        {
+            "docno": "86",
+            "name": "Frax Ether",
+            "symbol": "FRXETH",
+            "price": "$2,196.39",
+            "market_cap": "$657,483,856",
+            "percent_change_1h": "0.9%",
+            "percent_change_24h": "-6.6%",
+            "percent_change_7d": "-1.0%",
+            "logo_url": "https://assets.coingecko.com/coins/images/28284/standard/frxETH_icon.png?1696527284",
+            "source": "coingecko"
+        },
+        {
+            "docno": "111",
+            "name": "cETH",
+            "symbol": "CETH",
+            "price": "$43.66",
+            "market_cap": "$502,582,506",
+            "percent_change_1h": "-0.2%",
+            "percent_change_24h": "-7.7%",
+            "percent_change_7d": "-2.2%",
+            "logo_url": "https://assets.coingecko.com/coins/images/10643/standard/ceth.png?1696510617",
+            "source": "coingecko"
+        },
+        {
+            "docno": "112",
+            "name": "Staked Frax Ether",
+            "symbol": "SFRXETH",
+            "price": "$2,323.00",
+            "market_cap": "$492,139,821",
+            "percent_change_1h": "0.1%",
+            "percent_change_24h": "-7.5%",
+            "percent_change_7d": "-1.9%",
+            "logo_url": "https://assets.coingecko.com/coins/images/28285/standard/sfrxETH_icon.png?1696527285",
+            "source": "coingecko"
+        },
+        {
+            "docno": "115",
+            "name": "Tether Gold",
+            "symbol": "XAUT",
+            "price": "$1,983.74",
+            "market_cap": "$488,758,893",
+            "percent_change_1h": "0.3%",
+            "percent_change_24h": "-0.9%",
+            "percent_change_7d": "-2.1%",
+            "logo_url": "https://assets.coingecko.com/coins/images/10481/standard/Tether_Gold.png?1696510471",
+            "source": "coingecko"
+        },
+        {
+            "docno": "123",
+            "name": "Coinbase Wrapped Staked ETH",
+            "symbol": "CBETH",
+            "price": "$2,299.43",
+            "market_cap": "$458,767,047",
+            "percent_change_1h": "0.0%",
+            "percent_change_24h": "-7.4%",
+            "percent_change_7d": "-2.0%",
+            "logo_url": "https://assets.coingecko.com/coins/images/27008/standard/cbeth.png?1696526061",
+            "source": "coingecko"
+        },
+        {
+            "docno": "173",
+            "name": "EthereumPoW",
+            "symbol": "ETHW",
+            "price": "$2.61",
+            "market_cap": "$280,154,679",
+            "percent_change_1h": "-0.8%",
+            "percent_change_24h": "-10.6%",
+            "percent_change_7d": "-10.8%",
+            "logo_url": "https://assets.coingecko.com/coins/images/26997/standard/logo-clear.png?1696526049",
+            "source": "coingecko"
+        },
+        {
+            "docno": "181",
+            "name": "Ethereum Name Service",
+            "symbol": "ENS",
+            "price": "$8.65",
+            "market_cap": "$261,120,768",
+            "percent_change_1h": "-0.1%",
+            "percent_change_24h": "-10.4%",
+            "percent_change_7d": "-4.7%",
+            "logo_url": "https://assets.coingecko.com/coins/images/19785/standard/acatxTm8_400x400.jpg?1696519207",
+            "source": "coingecko"
+        },
+        {
+            "docno": "202",
+            "name": "Ethereum",
+            "symbol": "ETH",
+            "price": "2,180.63",
+            "market_cap": "266.17 billion",
+            "percent_change_1h": "",
+            "percent_change_24h": "-7.47%",
+            "percent_change_7d": "",
+            "logo_url": "https://cdn.coinranking.com/rk4RKHOuW/eth.svg?size=30x30",
+            "source": "coinranking"
+        },
+        {
+            "docno": "203",
+            "name": "Tether USD",
+            "symbol": "USDT",
+            "price": "1.00",
+            "market_cap": "90.82 billion",
+            "percent_change_1h": "",
+            "percent_change_24h": "-0.02%",
+            "percent_change_7d": "",
+            "logo_url": "https://cdn.coinranking.com/mgHqwlCLj/usdt.svg?size=30x30",
+            "source": "coinranking"
+        },
+        {
+            "docno": "214",
+            "name": "Wrapped liquid staked Ether 2.0",
+            "symbol": "wstETH",
+            "price": "2,504.71",
+            "market_cap": "8.51 billion",
+            "percent_change_1h": "",
+            "percent_change_24h": "-7.58%",
+            "percent_change_7d": "",
+            "logo_url": "https://cdn.coinranking.com/LQg69oxqx/wstETH.PNG?size=30x30",
+            "source": "coinranking"
+        },
+        {
+            "docno": "217",
+            "name": "Wrapped Ether",
+            "symbol": "WETH",
+            "price": "2,203.78",
+            "market_cap": "7.42 billion",
+            "percent_change_1h": "",
+            "percent_change_24h": "-6.72%",
+            "percent_change_7d": "",
+            "logo_url": "https://cdn.coinranking.com/KIviQyZlt/weth.svg?size=30x30",
+            "source": "coinranking"
+        },
+        {
+            "docno": "230",
+            "name": "Ethereum Classic",
+            "symbol": "ETC",
+            "price": "20.04",
+            "market_cap": "2.90 billion",
+            "percent_change_1h": "",
+            "percent_change_24h": "-9.94%",
+            "percent_change_7d": "",
+            "logo_url": "https://cdn.coinranking.com/rJfyor__W/etc.svg?size=30x30",
+            "source": "coinranking"
+        },
+        {
+            "docno": "256",
+            "name": "Rocket Pool ETH",
+            "symbol": "RETH",
+            "price": "2,395.17",
+            "market_cap": "1.30 billion",
+            "percent_change_1h": "",
+            "percent_change_24h": "-7.16%",
+            "percent_change_7d": "",
+            "logo_url": "https://cdn.coinranking.com/IcRuLlzFZ/15060.png?size=30x30",
+            "source": "coinranking"
+        },
+        {
+            "docno": "354",
+            "name": "EthereumPoW",
+            "symbol": "ETHW",
+            "price": "2.61",
+            "market_cap": "280.91 million",
+            "percent_change_1h": "",
+            "percent_change_24h": "-10.73%",
+            "percent_change_7d": "",
+            "logo_url": "https://cdn.coinranking.com/_QuemX1JJ/21296.png?size=30x30",
+            "source": "coinranking"
+        },
+        {
+            "docno": "360",
+            "name": "Ethereum Name Service",
+            "symbol": "ENS",
+            "price": "8.63",
+            "market_cap": "261.57 million",
+            "percent_change_1h": "",
+            "percent_change_24h": "-10.81%",
+            "percent_change_7d": "",
+            "logo_url": "https://cdn.coinranking.com/aUQr3CkJU/ENS.png?size=30x30",
+            "source": "coinranking"
+        }
+    ],
+    "recommendations": [
+        {
+            "name": "Ethereum Name Service",
+            "symbol": "ENS",
+            "price": "8.63",
+            "market_cap": "261.57 million",
+            "logo_url": "https://cdn.coinranking.com/aUQr3CkJU/ENS.png?size=30x30",
+            "source": "coinranking"
+        },
+        {
+            "name": "Ethereum",
+            "symbol": "ETH",
+            "price": "2,180.63",
+            "market_cap": "266.17 billion",
+            "logo_url": "https://cdn.coinranking.com/rk4RKHOuW/eth.svg?size=30x30",
+            "source": "coinranking"
+        },
+        {
+            "name": "Ethereum Name Service",
+            "symbol": "ENS",
+            "price": "$8.65",
+            "market_cap": "$261,120,768",
+            "logo_url": "https://assets.coingecko.com/coins/images/19785/standard/acatxTm8_400x400.jpg?1696519207",
+            "source": "coingecko"
+        },
+        {
+            "name": "Echelon Prime",
+            "symbol": "PRIME",
+            "price": "7.98",
+            "market_cap": "242.98 million",
+            "logo_url": "https://cdn.coinranking.com/fonfHmzJr/prime.png?size=30x30",
+            "source": "coinranking"
+        },
+        {
+            "name": "Bitcoin Gold",
+            "symbol": "BTG",
+            "price": "17.13",
+            "market_cap": "297.41 million",
+            "logo_url": "https://cdn.coinranking.com/BkLedkw-G/btg.svg?size=30x30",
+            "source": "coinranking"
+        }
+    ]
+}
