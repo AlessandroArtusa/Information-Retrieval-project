@@ -12,7 +12,10 @@ const app = express()
 
 app.use(cors())
 app.use(morgan("coins"))
+app.set('views', './views'); 
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/frontend'));
+let init_val= '';
 
 //routes
 
@@ -21,7 +24,7 @@ const runPythonScript = (parameter, callback) => {
   const param = parameter;
 
   // Execute the Python script
-  exec(`python3 ${pythonScriptPath} "${param}"`, (error, stdout, stderr) => {
+  exec(`python3 ${pythonScriptPath} "${parameter}"`, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error executing Python script: ${error.message}`);
       callback(error);
@@ -55,15 +58,31 @@ app.get("/list", async (req, res) => {
   }
 });
 
+app.get("/search", (req, res) => {
+  init_val = req.query.query; // Get the query parameter from URL
+
+  // Run the Python script with the query
+  runPythonScript(init_val, (error) => {
+    if (error) {
+      res.status(500).send('Error executing Python script');
+      return;
+    }
+
+    // After script execution, reload the view with updated data
+    // Assuming the script modifies a file or data that the view will use
+    res.redirect('/index'); // Redirect to the index route
+  });
+});
+
 app.get("/index", (req, res) => {
 
   // Run the Python script and wait for completion
-  runPythonScript('', (error) => {
+  runPythonScript(init_val, (error) => {
     if (error) {
       res.status(500).send('Error executing Python script');
     } else {
       // Send the HTML file after the Python script has completed
-      res.sendFile('frontend/index.html', { root: __dirname });
+      res.render('index'); 
     }
   });
 });

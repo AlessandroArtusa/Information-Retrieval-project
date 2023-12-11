@@ -5,10 +5,10 @@ let filteredArray = []
 let limit_obj = {};
 
 const search_button = document.getElementById("queryForm");
-search_button.addEventListener("submit", (e) => {
-  e.preventDefault();
-  handleQuery();
-});
+// search_button.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   handleQuery();
+// });
 
 const market_cap_filter = document.getElementById("saveMarketCapValue");
 market_cap_filter.addEventListener("click", filter);
