@@ -1,4 +1,9 @@
-# Scrapy settings for scraper_crypto project
+# settings.py
+import scrapy_selenium
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+# Scrapy settings for coinMarketCap project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +12,30 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "scraper_crypto"
+BOT_NAME = "coinMarketCap"
 
-SPIDER_MODULES = ["scraper_crypto.spiders"]
-NEWSPIDER_MODULE = "scraper_crypto.spiders"
+SPIDER_MODULES = ["coinMarketCap.spiders"]
+NEWSPIDER_MODULE = "coinMarketCap.spiders"
 
+# settings.py
+# Enable Selenium
+SELENIUM_DRIVER = "chrome"  # Options: chrome, firefox
+
+# Set Chrome driver path
+SELENIUM_DRIVER_PATH = "/path/to/chromedriver"
+
+# Headless browsing (optional)
+SELENIUM_DRIVER_ARGUMENTS = ["--headless"]
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = "scraper_crypto (+http://www.yourdomain.com)"
+# settings.py
+# User-Agent
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
+
+# Configure Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--incognito")
+SELENIUM_DRIVER_OPTIONS = {"options": chrome_options}
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -25,7 +46,7 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+# DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
@@ -45,15 +66,16 @@ DOWNLOAD_DELAY = 3
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    "scraper_crypto.middlewares.ScraperCryptoSpiderMiddleware": 543,
+#    "coinMarketCap.middlewares.CoinmarketcapSpiderMiddleware": 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
+# settings.py
 DOWNLOADER_MIDDLEWARES = {
-    "scrapy.downloadermiddlewares.useragent.UserAgentMiddleware": None,
-    "scrapy_user_agents.middlewares.RandomUserAgentMiddleware": 400,
+    "scrapy_selenium.SeleniumMiddleware": 800,
 }
+
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -64,7 +86,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 # ITEM_PIPELINES = {
-#    "scraper_crypto.pipelines.ScraperCryptoPipeline": 300,
+#    "coinMarketCap.pipelines.CoinmarketcapPipeline": 300,
 # }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
