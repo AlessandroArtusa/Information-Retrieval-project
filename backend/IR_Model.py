@@ -1,3 +1,5 @@
+import sys
+import argparse
 import subprocess
 import pandas as pd
 import pyterrier as pt
@@ -7,7 +9,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # Run the run_spiders.py script
 try:
-    subprocess.run(["python3", "run_spiders.py"], check=True)
+    subprocess.run(["python3", "../run_spiders.py"], check=True)
 except subprocess.CalledProcessError as e:
     print("Failed to run run_spiders.py")
     print(e)
@@ -26,7 +28,7 @@ def read_jsonl_data(file_path):
     return data
 
 # Load JSONL data
-jsonl_file_path = 'scraper_output.jsonl'
+jsonl_file_path = '../scraper_output.jsonl'
 data = read_jsonl_data(jsonl_file_path)
 
 # Prepare data with key checks
@@ -58,7 +60,7 @@ def create_and_index_data(df):
 # Create the index
 index_ref = create_and_index_data(df)
 
-# Function to search cryptocurrencies and automatically mark all as relevant
+## Function to search cryptocurrencies and automatically mark all as relevant
 def search_and_feedback(query):
     # Directly filter the DataFrame for names containing the query substring
     filtered_results = df[df['name'].str.contains(query, case=False, na=False)].copy()
@@ -77,7 +79,6 @@ def search_and_feedback(query):
         write_json_to_file(json_data, 'search_results.json')
     else:
         print("No results found")
-
         
 def collect_user_feedback(results):
     relevant_docs = []
@@ -168,16 +169,38 @@ def write_json_to_file(data, filename):
         
 # Function to handle feedback from HTML page
 def handle_html_feedback(docno, is_relevant):
-    # Update the relevance of the specific document
-    df.loc[df['docno'] == docno, 'relevant'] = is_relevant
+    # Ensure the 'relevant' column exists and is properly initialized
+    if 'relevant' not in df.columns:
+        df['relevant'] = True  # Default all as relevant
 
-    # Assume you want to regenerate recommendations and JSON file after feedback
+    # Update the relevance of the specific document
+    df.loc[df['docno'] == str(docno), 'relevant'] = is_relevant
+
+    # Filter out only relevant documents
+    relevant_results = df[df['relevant']].copy()
+
+    # Provide automatic recommendations
     recommendations = get_recommendations("Your Query Here")
-    json_data = create_json_results(df, recommendations)
+
+    # Gather results and recommendations in JSON format
+    json_data = create_json_results(relevant_results, recommendations)
+
+    # Write the JSON content to a file
     write_json_to_file(json_data, 'search_results.json')
 
-
-
 # Example Usage
-search_and_feedback("")
-handle_html_feedback(4, False)
+# search_and_feedback("eth")
+# handle_html_feedback(4, False)
+if __name__ == "__main__":
+    # Create argument parser
+    parser = argparse.ArgumentParser(description="Run a function with parameters from the command line.")
+
+    # Add arguments
+    parser.add_argument("param1", type=str, help="First parameter")
+    
+    # Parse arguments
+    args = parser.parse_args()
+    print(args.param1)
+
+    # Call the function with parsed arguments
+    search_and_feedback(args.param1)

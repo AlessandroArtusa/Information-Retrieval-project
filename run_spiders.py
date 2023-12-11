@@ -16,6 +16,6 @@ def run_scrapy_crawl(spider_name, project_path):
     except Exception as e:
         print(f"Error running Scrapy crawl: {e}")
 
-delete_file('./scraper_output.jsonl')
-run_scrapy_crawl('geckoSpider', './scraper')
-run_scrapy_crawl('coinRankingSpider', './scraper')
+delete_file('../scraper_output.jsonl')
+run_scrapy_crawl('geckoSpider', '../scraper')
+run_scrapy_crawl('coinRankingSpider', '../scraper')
