@@ -120,7 +120,7 @@ def get_recommendations(query, cosine_sim=cosine_sim):
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
 
     # Get the scores of the most similar cryptocurrencies
-    sim_scores = sim_scores[1:6] # Top 5 recommendations
+    sim_scores = sim_scores[1:7] # Top 6 recommendations
 
     # Get the cryptocurrency indices
     crypto_indices = [i[0] for i in sim_scores]

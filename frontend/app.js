@@ -1,6 +1,7 @@
 const coinList = document.getElementById("data");
 
 let coinsData = [];
+let recommendedData = [];
 let filteredArray = []
 let limit_obj = {};
 
@@ -173,13 +174,30 @@ const loadCoins = async () => {
     let responseData = await res.json();
     coinsData = responseData.results;
     coinsData.forEach(e => {
-      e.price = parseFloat(e.price.substring(1).replaceAll(",", ""));
-      e.market_cap = parseInt(e.market_cap.substring(1).replaceAll(",", ""));
+      if (e.source === "coinranking") {
+        e.market_cap = changeFormat(e.market_cap);
+        e.price = parseFloat(e.price.replaceAll(",", ""));
+      } else {
+        e.price = parseFloat(e.price.substring(1).replaceAll(",", ""));
+        e.market_cap = parseInt(e.market_cap.substring(1).replaceAll(",", ""));
+      }
       e.percent_change_1h = parseFloat(e.percent_change_1h);
       e.percent_change_24h = parseFloat(e.percent_change_24h);
       e.percent_change_7d = parseFloat(e.percent_change_7d);
     });
-    console.log(coinsData);
+    recommendedData = responseData.recommendations;
+    recommendedData.forEach(e => {
+      if (e.source === "coinranking") {
+        e.market_cap = changeFormat(e.market_cap);
+        e.price = parseFloat(e.price.replaceAll(",", ""));
+      } else {
+        e.price = parseFloat(e.price.substring(1).replaceAll(",", ""));
+        e.market_cap = parseInt(e.market_cap.substring(1).replaceAll(",", ""));
+      }
+      e.percent_change_1h = parseFloat(e.percent_change_1h);
+      e.percent_change_24h = parseFloat(e.percent_change_24h);
+      e.percent_change_7d = parseFloat(e.percent_change_7d);
+    });
     limit_obj = {
       market_cap: {
         min: Math.min(...getMarketCapLists()),
@@ -203,10 +221,20 @@ const loadCoins = async () => {
       }
     }
     displayCoins(coinsData);
+    displayRecommended(recommendedData);
   } catch (error) {
     console.log(error);
   }
 }
+
+function changeFormat(num) {
+  if (num.includes("billion")) {
+    return parseInt(num) * 1000000000;
+  } else if (num.includes("million")) {
+    return parseInt(num) * 1000000;
+  }
+}
+
 
 function color_percent(num) {
   if (num > 0) {
@@ -236,4 +264,16 @@ const displayCoins = (coins) => {
     .join('');
   coinList.innerHTML = htmlString
 }
-loadCoins()
+
+function displayRecommended(rec_arr) {
+  let cards = document.querySelectorAll(".card-body");
+  cards.forEach((e, i) => {
+    e.innerHTML = ` <h4 class="card-title">${rec_arr[i].name}</h4>
+                        <p class="card-text"><b>Symbol:</b> ${rec_arr[i].symbol}</p>
+                        <p class="card-text"><b>Logo:</b> <img style="width=24px; height: 24px" src="${rec_arr[i].logo_url}"></p>
+                        <p class="card-text"><b>Price:</b> ${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rec_arr[i].price)}</p>
+                        <p class="card-text"><b>Market Cap:</b> ${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rec_arr[i].market_cap)}</p>
+                        <p class="card-text"><b>Source:</b> ${rec_arr[i].source}</p>`
+  });
+}
+loadCoins();
