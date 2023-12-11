@@ -20,6 +20,7 @@ class GeckospiderSpider(scrapy.Spider):
             percent_change_7d = row.xpath("td[8]/span/text()").get()
             volume_change_24h = row.xpath("td[10]/span/text()").get()
             market_cap = row.xpath("td[11]/span/text()").get()
+            logo_url = row.xpath("td[3]/a/img/@src").get()
             yield {
                 "name": name.strip(),
                 "symbol": symbol.strip(),
@@ -29,7 +30,8 @@ class GeckospiderSpider(scrapy.Spider):
                 "percent_change_7d": percent_change_7d,
                 "volume_change_24h": volume_change_24h,
                 "market_cap": market_cap,
-                "source": "coingecko"
+                "logo_url": logo_url,
+                "source": "coingecko",
             }
 
         # Follow next page link

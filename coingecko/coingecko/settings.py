@@ -12,6 +12,14 @@ BOT_NAME = "coingecko"
 SPIDER_MODULES = ["coingecko.spiders"]
 NEWSPIDER_MODULE = "coingecko.spiders"
 
+# output
+FEEDS = {
+    'output.json': {
+        'format': 'json',
+        'overwrite': True,  # Set to True if you want to overwrite the file on each run
+    },
+}
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0"
