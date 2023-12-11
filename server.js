@@ -21,10 +21,10 @@ let init_val= '';
 
 const runPythonScript = (parameter, callback) => {
   const pythonScriptPath = 'backend/IR_Model.py';
-  const param = parameter;
-
+  const options = { maxBuffer: 2024 * 2024 };
+ 
   // Execute the Python script
-  exec(`python3 ${pythonScriptPath} "${parameter}"`, (error, stdout, stderr) => {
+  exec(`python3 ${pythonScriptPath} "${parameter}"`, options, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error executing Python script: ${error.message}`);
       callback(error);

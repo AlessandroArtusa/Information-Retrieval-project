@@ -6,7 +6,7 @@ class GeckospiderSpider(scrapy.Spider):
     name = "geckoSpider"
     allowed_domains = ["www.coingecko.com"]
     start_urls = ["https://www.coingecko.com/"]
-    pages_to_scrape = 2
+    # pages_to_scrape = 2
 
     def get_percent_change(self, element):
         percent_change_value = element.xpath("text()").get()
@@ -48,9 +48,9 @@ class GeckospiderSpider(scrapy.Spider):
             }
 
         # Follow next page link
-        if self.pages_to_scrape > 1:
-            next_page = response.xpath('//a[@rel="next"]/@href').get()
-            if next_page:
-                absolute_url = urljoin(response.url, next_page)
-                self.pages_to_scrape -= 1
-                yield scrapy.Request(url=absolute_url, callback=self.parse)
+        # if self.pages_to_scrape > 1:
+        #     next_page = response.xpath('//a[@rel="next"]/@href').get()
+        #     if next_page:
+        #         absolute_url = urljoin(response.url, next_page)
+        #         self.pages_to_scrape -= 1
+        #         yield scrapy.Request(url=absolute_url, callback=self.parse)

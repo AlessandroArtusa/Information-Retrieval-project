@@ -6,7 +6,7 @@ class CoinrankingspiderSpider(scrapy.Spider):
     name = "coinRankingSpider"
     allowed_domains = ["coinranking.com"]
     start_urls = ["https://coinranking.com/"]
-    pages_to_scrape = 4
+    pages_to_scrape = 2
 
     def parse(self, response):
         rows = response.xpath('//*[@id="__layout"]/div/div[3]/div[6]/table/tbody/tr')[1:]
