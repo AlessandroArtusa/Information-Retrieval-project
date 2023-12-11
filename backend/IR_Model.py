@@ -65,18 +65,15 @@ def search_and_feedback(query):
     # Directly filter the DataFrame for names containing the query substring
     filtered_results = df[df['name'].str.contains(query, case=False, na=False)].copy()
 
-    if not filtered_results.empty:
-        # Automatically mark all documents as relevant
-        filtered_results['relevant'] = True
-
-        # Provide automatic recommendations
-        recommendations = get_recommendations(query)
-
-        # Gather results and recommendations in JSON format
-        json_data = create_json_results(filtered_results, recommendations)
-
-        # Write the JSON content to a file
-        write_json_to_file(json_data, 'search_results.json')
+    
+    # Automatically mark all documents as relevant
+    filtered_results['relevant'] = True
+    # Provide automatic recommendations
+    recommendations = get_recommendations(query)
+    # Gather results and recommendations in JSON format
+    json_data = create_json_results(filtered_results, recommendations)
+    # Write the JSON content to a file
+    write_json_to_file(json_data, 'search_results.json')
     
 def collect_user_feedback(results):
     relevant_docs = []
